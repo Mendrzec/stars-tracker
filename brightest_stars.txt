@@ -1,0 +1,98 @@
+1	−1,44	α CMa	Syriusz	8,6	6h 45m 08,92s	−16° 42′ 58,02″
+2	−0,62	α Car	Kanopus	313	6h 23m 57,11s	−52° 41′ 44,38″
+3	−0,05	α Boo	Arktur	36,7	14h 15m 39,7s	19° 10′ 56″	zmiany jasności o 0,04m co 8,3 dnia
+4	−0,01	α1 Cen	Alfa Centauri A (Rigil Kentaurus)	4,36	14h 39m 36,50s	−60° 50′ 02,31″
+5	0,03	α Lyr	Wega	25,3	18h 36m 56,34s	38° 47′ 01,29″	dysk pyłowy
+6	0,18	β Ori	Rigel	780	5h 14m 32,27s	−8° 12′ 05,91″
+7	0,4	α CMi	Procjon	11,4	7h 39m 18,1s	5° 13′ 29″
+8	0,45	α Eri	Achernar	144	01h 37m 42,8s	−57° 14′ 12″
+9	0,45	α Ori	Betelgeza	427	5h 55m 10,31s	7° 24′ 25,43″	zmiany jasności od 1,2m do 0,3m
+10	0,61	β Cen	Hadar	525	14h 03m 49,4s	−60° 22′ 23″
+11	0,71	α1 Aur	Kapella (Alfa Aurigae A)	42,2	5h 16m 41,36s	45° 59′ 52,77″
+12	0,76	α Aql	Altair	16,8	19h 50m 47,00s	8° 52′ 05,96″
+13	0,87	α Tau	Aldebaran	65,1	4h 35m 55,2s	16° 30′ 33″	1 planeta: Aldebaran b; zmiany jasności o 0,2m
+14	0,96	α1 Aur	Alfa Aurigae B	42,2	5h 16m 41,36s	45° 59′ 52,77″
+15	0,98	α Vir	Spica	260	13h 25m 11,6s	−11° 09′ 41″
+16	1,06	α Sco	Antares	600	16h 29m 24s	−26° 25′ 55″
+17	1,16	β Gem	Polluks	33,7	7h 45m 19,4s	28° 01′ 35″	1 planeta: Thestias
+18	1,17	α PsA	Fomalhaut	25,1	22h 57m 39,1s	−29° 37′ 20″	1 planeta: Dagon
+19	1,25	β Cru	Mimosa	355	12h 47m 43,2s	−59° 41′ 19″
+20	1,25	α Cyg	Deneb	1500	20h 41m 25,9s	45° 16′ 49″
+21	1,35	α2 Cen	Alfa Centauri B	4,36	14h 39m 35,08s	−60° 50′ 13,76″
+22	1,35	α Leo	Regulus	78	10h 08m 22,3s	11° 58′ 02″
+23	1,40	α1 Cru	Acrux (Alfa Crucis A)	320	12h 26m 35,90s	−63° 05′ 56,73″
+24	1,50	ε CMa	Adara	431	6h 58m 37,6s	−28° 58′ 19″
+25	1,62	λ Sco	Shaula	700	17h 33m 36,6s	−37° 06′ 13″
+26	1,63	γ Cru	Gacrux	88	12h 31m 9,9s	−57° 06′ 48″
+27	1,64	γ Ori	Bellatrix	242	5h 25m 07,9s	6° 20′ 59″
+28	1,65	β Tau	Elnath	131	5h 26m 17,5s	28° 36′ 27″
+29	1,67	β Car	Miaplacidus	111	9h 13m 12,0s	−69° 43′ 02″
+30	1,70	ε Ori	Alnilam	1340	5h 36m 12,8s	−1° 12′ 06,9″
+31	1,70	ζ1 Ori	Alnitak	820	5h 40m 45,5s	−1° 56′ 34″
+32	1,73	α Gru	Alnair	101	22h 08m 14,0s	−46° 57′ 39,5″
+33	1,76	ε UMa	Alioth	81	12h 54m 01,6s	55° 57′ 35,4″
+34	1,78	γ2 Vel	Gamma Velorum	840	8h 09m 32,0s	−47° 20′ 12,0″
+35	1,79	ε Sgr	Kaus Australis	145	18h 24m 10,3s	−34° 23′ 03,5″
+36	1,79	α Per	Mirfak	590	3h 24m 19,4s	49° 51′ 40″
+37	1,83	δ CMa	Wezen	1790	7h 08m 23,5s	−26° 23′ 36″
+38	1,85	η UMa	Alkaid	101	13h 47m 32,4s	49° 18′ 48″
+39	1,86	θ Sco	Sargas	270	17h 37m 19,1s	−42° 59′ 52″
+40	1,87	α1 UMa	Dubhe	124	11h 03m 43,7s	61° 45′ 03″
+41	1,90	β Aur	Menkalinan	82,1	5h 59m 31,7s	44° 56′ 51″
+42	1,91	α TrA	Atria	415	16h 48m 39,9s	−69° 01′ 40″
+43	1,93	γ Gem	Alhena	105	6h 37m 42,7s	16° 23′ 57″
+44	1,94	α Pav	Peacock	183	20h 25m 38,9s	−56° 44′ 06″
+45	1,96	α1 Gem	Kastor	52	7h 34m 36s	31° 53′ 18″
+46	1,97	α UMi	Polaris	430	2h 31m 48,7s	89° 15′ 51″	Gwiazda zmienna – cefeida
+47	1,98	β CMa	Mirzam	500	6h 22m 42s	−17° 57′ 21,3″
+48	1,99	α Hya	Alphard	177	9h 27m 35,2s	−8° 39′ 31″
+49	2,01	α Ari	Hamal	66	2h 07m 10,41s	23° 27′ 44,72″	1 planeta: Alfa Arietis b; zmiany jasności od 2,04m do 1,98m
+51	2,03	δ1 Vel	Alsephina	80	8h 44m 42,2s	−54° 42′ 30″
+52	2,04	β Cet	Diphda	96	0h 43m 35,2s	−17° 59′ 12″
+53	2,05	σ Sgr	Nunki	225	18h 55m 15,9s	−26° 17′ 48″
+54	2,06	κ Ori	Saif	720	5h 47m 45,4s	−9° 40′ 11″
+55	2,06	θ Cen	Menkent	61	14h 06m 41,3s	36° 22′ 07,3″
+56	2,07	β And	Mirach	200	1h 09m 43,92s	35° 37′ 14,01″	zmiany jasności od 2,10m do 2,01m
+57	2,07	β UMi	Kochab	127	14h 50m 42,3s	74° 09′ 20″	1 planeta: Beta Ursae Minoris b
+58	2,07	β Gru	Tiaki	170	22h 42m 40,1s	−43° 53′ 05″	zmiany jasności od 2,3m do 2,0m
+59	2,08	α Oph	Rasalhague	46,7	17h 34m 56,1s	12° 33′ 36″
+60	2,09	α2 Cru	Alfa Crucis B	320	12h 26m 35,90s	−63° 05′ 56,73″
+61	2,12	β1 Per	Algol	93	3h 08m 10,13s	40° 57′ 20,33″	okresowe spadki jasności do 3,4m
+62	2,14	β Leo	Denebola	36,2	11h 49m 03,58s	14° 34′ 19,42″
+63	2,15	γ Cas	Gamma Cassiopeiae	610	0h 56m 42,5s	60° 43′ 00″
+64	2,21	ζ Pup	Naos	1400	8h 03m 35,1s	−40° 00′ 11,6″
+65	2,21	ι Car	Aspidiske	690	9h 17m 05,4s	−59° 16′ 31″
+66	2,22	α1 And	Alpheratz	97	0h 08m 23,26s	29° 05′ 25,56″
+67	2,23	λ Vel	Suhail	575	9h 07m 59,8s	−43° 25′ 57″	zmiany jasności od 2,30m do 2,14m
+68	2,23	γ Cyg	Sadr	1520	20h 22m 13,7s	40° 15′ 24″
+69	2,24	α1 CrB	Alphecca	75	15h 34m 41,3s	26° 42′ 53″
+70	2,24	α Cas	Szedar	228	0h 40m 30,5s	56° 32′ 14,5″
+71	2,24	γ Dra	Eltanin	148	17h 56m 36,4s	51° 29′ 20,3″
+72	2,26	γ1 And	Almach	355	2h 03m 53,95s	42° 19′ 47,01″
+73	2,28	β Cas	Caph	54	0h 09m 10,7s	59° 08′ 59″	zmiany jasności od 2,31m do 2,25m
+74	2,28	γ1 Leo	Algieba	126	10h 19m 58,3s	19° 50′ 30″
+75	2,29	ε Cen	Epsilon Centauri	375	13h 39m 53,2s	−53° 27′ 59″
+76	2,29	δ Sco	Dschubba	400	16h 00m 20,0s	−22° 37′ 18″
+77	2,29	ε Sco	Larawag	65	16h 50m 09,8s	−34° 17′ 36″
+78	2,30	α Lup	Alfa Lupi	550	14h 41m 55,8s	−47° 23′ 18″
+79	2,3	ζ1 UMa	Mizar	78	13h 23m 55,5s	54° 55′ 31″
+80	2,33	η Cen	Eta Centauri	310	14h 35m 30,4s	−42° 09′ 28″
+81	2,34	β UMa	Merak	79	11h 01m 50,5s	56° 22′ 57″
+82	2,38	ε Peg	Enif	670	21h 44m 11,2s	9° 52′ 30,0″
+83	2,39	κ Sco	Kappa Scorpii	465	17h 42m 29,3s	−39° 01′ 48″
+84	2,40	α Phe	Ankaa	77	0h 26m 17,1s	−42° 18′ 21,5″
+85	2,4	ε1 Car	Avior	630	8h 22m 30,8s	−59° 30′ 35″
+86	2,41	γ UMa	Phecda	84	11h 53m 49,8s	53° 41′ 41″
+87	2,44	β Peg	Scheat	199	23h 03m 46,5s	28° 04′ 58,0″
+88	2,45	α Cep	Alderamin	49	21h 18m 34,8s	62° 35′ 08,0″
+89	2,45	η CMa	Aludra	3200	7h 24m 11,1s	−29° 18′ 11″
+90	2,47	κ Vel	Markeb	540	9h 22m 06,8s	−55° 00′ 39″
+91	2,50	ε1 Cyg	Aljanah	165	20h 46m 12,5s	33° 58′ 12,9″
+92	2,49	α Peg	Markab	140	23h 04m 45,7s	15° 12′ 18,9″
+93	2,54	α Cet	Menkar	220	3h 02m 16,8s	4° 05′ 23,0″
+94	2,54	ζ Oph	Zeta Ophiuchi	460	16h 37m 09,5s	−10° 34′ 01,4″
+95	2,55	ζ Cen	Zeta Centauri	385	13h 55m 32,4s	47° 17′ 18″
+96	2,56	δ Leo	Zosma	58	11h 14m 06,5s	20° 31′ 25,4″
+97	2,56	β1 Sco	Acrab	530	16h 05m 26,7s	−19° 48′ 20″
+98	2,58	α Lep	Arneb	1280	5h 32m 43,8s	−17° 49′ 20,3″
+99	2,58	δ Cen	Delta Centauri	395	12h 08m 21,5s	−50° 43′ 21″

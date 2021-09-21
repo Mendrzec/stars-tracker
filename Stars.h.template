@@ -1,0 +1,25 @@
+#pragma once
+
+#include "CoordsUtils.h"
+
+#include <array>
+
+namespace coords {
+
+enum class StarKey : unsigned int {
+{{STARS_ENUM_KEYS}}
+};
+
+struct Star {
+	StarKey key_;
+	const char* name_;
+	RA ra_;
+	Dec dec_;
+};
+
+// TODO print all available stars on startup
+constexpr const std::array<Star, static_cast<unsigned int>(StarKey::last) + 1> STARS = {{
+{{STARS_ARRAY}}
+}};
+
+}
