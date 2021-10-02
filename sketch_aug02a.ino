@@ -5,20 +5,15 @@
 
 #include <AccelStepper.h>
 #include <arduino-timer.h>
-
-
 #include <PS4Controller.h>
-
-
-
 #include <SerialCommands.h>
 
 #include <exception>
 #include <stdexcept>
 
+#include "ButtonProcessor.h"
 #include "Mount.h"
 #include "ScreenUI.h"
-
 
 
 auto timer = timer_create_default();
@@ -156,6 +151,13 @@ void menuCmdCb(SerialCommands* sender) {
 }
 SerialCommand menuCmd("menu", &menuCmdCb);
 
+
+ButtonProcessor ps4ButtonDown([]() { return PS4.Down(); });
+ButtonProcessor ps4ButtonUp([]() { return PS4.Up(); });
+ButtonProcessor ps4ButtonCross([]() { return PS4.Cross(); });
+ButtonProcessor ps4ButtonCircle([]() { return PS4.Circle(); });
+
+
 void setup() {
 	Serial.begin(9600);
 	u8g2.begin();
@@ -176,14 +178,17 @@ void setup() {
 		return true;
 	});
 
-	timer.every(100, [&mount](void*) -> bool {
-		if (PS4.Down()) { screen.down(); }
-		if (PS4.Up()) { screen.up(); }
-		if (PS4.Cross()) { screen.enter(); }
-		if (PS4.Circle()) { screen.exit(); }
+	timer.every(ButtonProcessor::PS4_READ_INTERVAL_MS, [&mount](void*) -> bool {
+		if (!PS4.isConnected()) {
+			return true;
+		}
+		if (ps4ButtonDown()) { screen.down(); }
+		if (ps4ButtonUp()) { screen.up(); }
+		if (ps4ButtonCross()) { screen.enter(); }
+		if (ps4ButtonCircle()) { screen.exit(); }
 
 		// set speed with deadzone
-		auto speedX = abs(PS4.LStickX()) >= 10 ? -PS4.LStickX() : 0;
+		auto speedX = abs(PS4.LStickX()) >= 10 ? PS4.LStickX() : 0;
 		auto speedY = abs(PS4.RStickY()) >= 10 ? PS4.RStickY() : 0;
 		mount.manualControlSetSpeed({speedX, speedY});
 

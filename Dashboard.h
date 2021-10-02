@@ -59,9 +59,9 @@ public:
 
 		char s[32];
 		auto currentPosition = mount_.currentPositionDeg();
-		snprintf(s, sizeof(s), "X:  %3.1f", currentPosition.first);
+		snprintf(s, sizeof(s), "X:  %3.2f", currentPosition.first);
 		u8g2_.drawStr(66, 20, s);
-		snprintf(s, sizeof(s), "Y:  %3.1f", currentPosition.second);
+		snprintf(s, sizeof(s), "Y:  %3.2f", currentPosition.second);
 		u8g2_.drawStr(66, 30, s);
 		// if (mount_.operationMode_ == Mount::OperationMode::EASY_TRACK_GOTO || mount_.operationMode_ == Mount::OperationMode::FULL_GOTO) {
 		// 	snprintf(s, sizeof(s), "%s", mount_.currentPositionRA().str().c_str());
@@ -69,9 +69,9 @@ public:
 		// 	snprintf(s, sizeof(s), "%s", mount_.currentPositionDec().str().c_str());
 		// 	u8g2_.drawStr(66, 50, s);
 		// }
-		snprintf(s, sizeof(s), "TX: %3.1f", mount_.targetPositionXDeg());
+		snprintf(s, sizeof(s), "TX: %3.2f", mount_.targetPositionXDeg());
 		u8g2_.drawStr(66, 40, s);
-		snprintf(s, sizeof(s), "TY: %3.1f", mount_.targetPositionYDeg());
+		snprintf(s, sizeof(s), "TY: %3.2f", mount_.targetPositionYDeg());
 		u8g2_.drawStr(66, 50, s);
 	}
 	void down() override {

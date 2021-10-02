@@ -4,7 +4,7 @@
 #include "Dashboard.h"
 #include "ItemsList.h"
 #include "Mount.h"
-#include "Stars.h"
+#include "CelestialObjects/Stars/Stars.h"
 
 #include <U8g2lib.h>
 
@@ -23,28 +23,34 @@ public:
 	void enter() { currentScreen_->enter(); }
 	void exit() { currentScreen_->exit(); }
 
-	template<size_t N, std::size_t... I>
-	ItemsList::Items unpackStarsForStarAlignmentItemsList_(
-			const std::array<coords::Star, N>& stars, std::index_sequence<I...>,
-			const coords::Star* selectedStar,
-			ItemsList& alignmentConfirmationScreen,
-			ScreenItem* currentScreen) {
+	template<typename Stars, std::size_t... I>
+	ItemsList::Items unpackStarsForTwoStarAlignmentFirstStar_(const Stars& stars, std::index_sequence<I...>) {
 		return ItemsList::Items{
-			{stars[I].name_, [star=&stars[I], &selectedStar, &alignmentConfirmationScreen, &currentScreen]() {
-				selectedStar = star;
-				alignmentConfirmationScreen.text_ = {std::string("Move to ") + star->name_ + " and", "press OK"};
-				currentScreen = &alignmentConfirmationScreen;
+			{stars[I].name_, [this, &star=stars[I]]() {
+				selectedStar_ = &star;
+				twoStarAlignmentFirstStarConfirm_.text_ = {std::string("Move to ") + star.name_ + " and", "press OK"};
+				currentScreen_ = &twoStarAlignmentFirstStarConfirm_;
 			}}...
 		};
 	}
 
-	template<std::size_t N>
-	ItemsList::Items unpackStarsForStarAlignmentItemsList_(
-			const std::array<coords::Star, N>& stars,
-			const coords::Star* selectedStar,
-			ItemsList& alignmentConfirmationScreen,
-			ScreenItem* currentScreen) {
-		return unpackStarsForStarAlignmentItemsList_(stars, std::make_index_sequence<N>{}, selectedStar, alignmentConfirmationScreen, currentScreen);
+	ItemsList::Items unpackStarsForTwoStarAlignmentFirstStar() {
+		return unpackStarsForTwoStarAlignmentFirstStar_(coords::STARS, std::make_index_sequence<coords::STARS.size()>{});
+	}
+
+	template<typename Stars, std::size_t... I>
+	ItemsList::Items unpackStarsForTwoStarAlignmentSecondStar_(const Stars& stars, std::index_sequence<I...>) {
+		return ItemsList::Items{
+			{stars[I].name_, [this, &star=stars[I]]() {
+				selectedStar_ = &star;
+				twoStarAlignmentSecondStarConfirm_.text_ = {std::string("Move to ") + star.name_ + " and", "press OK"};
+				currentScreen_ = &twoStarAlignmentSecondStarConfirm_;
+			}}...
+		};
+	}
+
+	ItemsList::Items unpackStarsForTwoStarAlignmentSecondStar() {
+		return unpackStarsForTwoStarAlignmentSecondStar_(coords::STARS, std::make_index_sequence<coords::STARS.size()>{});
 	}
 
 	U8G2& u8g2_;
@@ -156,7 +162,7 @@ public:
 	const coords::Star* selectedStar_ = &coords::STARS[static_cast<unsigned int>(coords::StarKey::Altair)];
 
 	ItemsList twoStarAlignmentFirstStar_{u8g2_, "2S alignment 1/2", {"Choose first star:"}, {
-			unpackStarsForStarAlignmentItemsList_(coords::STARS, selectedStar_, twoStarAlignmentFirstStarConfirm_, currentScreen_)
+			unpackStarsForTwoStarAlignmentFirstStar()
 		}, [this]() { currentScreen_ = &easyTrackAlignment_; }
 	};
 
@@ -170,7 +176,7 @@ public:
 	};
 
 	ItemsList twoStarAlignmentSecondStar_{u8g2_, "2S alignment 2/2", {"Choose second star:"}, {
-			unpackStarsForStarAlignmentItemsList_(coords::STARS, selectedStar_, twoStarAlignmentSecondStarConfirm_, currentScreen_)
+			unpackStarsForTwoStarAlignmentSecondStar()
 		}, [this]() { currentScreen_ = &easyTrackAlignment_; }
 	};
 

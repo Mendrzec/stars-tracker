@@ -1,0 +1,10 @@
+{
+    "configuration": "PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,DebugLevel=none",
+    "board": "esp32:esp32:esp32",
+    "sketch": "sketch_aug02a.ino",
+    "port": "COM3",
+    "output": "../build",
+    "buildPreferences": [
+        ["build.extra_flags", "-std=c++17 -std=gnu++17 -DCORE_DEBUG_LEVEL=5"]
+    ]
+}

@@ -188,7 +188,8 @@ public:
 			return;
 		}
 		LOG_DEBUG(serial_.printf("safeMoveTo() moveto(limits,steps): %d, %d\n", position.first, position.second));
-
+		stepperX_.moveTo(stepperX_.currentPosition());
+		stepperY_.moveTo(stepperY_.currentPosition());
 		stepperX_.setMaxSpeed(speed);
 		stepperX_.moveTo(position.first);
 		stepperY_.setMaxSpeed(speed);
