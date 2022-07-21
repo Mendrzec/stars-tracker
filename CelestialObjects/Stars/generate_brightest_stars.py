@@ -21,7 +21,7 @@ def parse_to_star_array_entry(star: list):
     symbol, name, ra, dec = star
     ra_str = ", ".join(str(r) for r in ra)
     dec_str = ", ".join(str(d) for d in dec)
-    return f"{{StarKey::{symbol}, \"{name}\", RA{{{ra_str}}}, Dec{{{dec_str}}}}}"
+    return f"StarObject(Star::{symbol}, \"{name}\", RA{{{ra_str}}}, Dec{{{dec_str}}})"
 
 
 stars = []

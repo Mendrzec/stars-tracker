@@ -116,6 +116,20 @@ Dec degToDec(double deg) {
 	return Dec{degrees, minutes, seconds};
 }
 
+struct CelestialObjectBase {
+	constexpr CelestialObjectBase(const char* name, RA ra, Dec dec) : name_(name), ra_(std::move(ra)), dec_(std::move(dec)) {}
+
+	const char* name_;
+	RA ra_;
+	Dec dec_;
+};
+
+template<typename CelestialObjectType>
+struct CelestialObject : public CelestialObjectBase {
+	constexpr CelestialObject(CelestialObjectType key, const char* name, RA ra, Dec dec)
+		: key_(key), CelestialObjectBase(name, std::move(ra), std::move(dec)) {}
+	CelestialObjectType key_;
+};
 
 // radians per second
 constexpr const double EARTH_ANG_SPEED = 7.292115 * pow(10,-5);

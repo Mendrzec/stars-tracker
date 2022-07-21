@@ -1,0 +1,19 @@
+#pragma once
+
+#include "../../CoordsUtils.h"
+
+#include <array>
+
+namespace coords {
+
+enum class Messier : unsigned int {
+{{MESSIER_ENUM_KEYS}}
+};
+
+// TODO print all available stars on startup
+using MessierObject = CelestialObject<Messier>;
+constexpr const std::array<MessierObject, static_cast<unsigned int>(Messier::last) + 1> MESSIER = {{
+{{MESSIER_ARRAY}}
+}};
+
+}

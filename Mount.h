@@ -206,6 +206,7 @@ public:
 		safeMoveToPositionRad({position.first * DEG_TO_RAD, position.second * DEG_TO_RAD}, speed);
 	}
 
+	// `position` is RA and Dec pair in radians
 	void safeMoveToPositionRADec(std::pair<double, double> position, int speed  = MAX_SPEED) {
 		LOG_DEBUG(serial_.printf("safeMoveToPositionRADec(): position(rad) %f, %f\n", position.first, position.second));
 		auto angle = getEarthDeltaAngleSinceTimestamp(alignmentTimestamp_);

@@ -4,6 +4,7 @@
 #include "Dashboard.h"
 #include "ItemsList.h"
 #include "Mount.h"
+#include "CelestialObjects/Messier/Messier.h"
 #include "CelestialObjects/Stars/Stars.h"
 
 #include <U8g2lib.h>
@@ -27,7 +28,7 @@ public:
 	ItemsList::Items unpackStarsForTwoStarAlignmentFirstStar_(const Stars& stars, std::index_sequence<I...>) {
 		return ItemsList::Items{
 			{stars[I].name_, [this, &star=stars[I]]() {
-				selectedStar_ = &star;
+				selectedCelestialObject_ = &star;
 				twoStarAlignmentFirstStarConfirm_.text_ = {std::string("Move to ") + star.name_ + " and", "press OK"};
 				currentScreen_ = &twoStarAlignmentFirstStarConfirm_;
 			}}...
@@ -42,7 +43,7 @@ public:
 	ItemsList::Items unpackStarsForTwoStarAlignmentSecondStar_(const Stars& stars, std::index_sequence<I...>) {
 		return ItemsList::Items{
 			{stars[I].name_, [this, &star=stars[I]]() {
-				selectedStar_ = &star;
+				selectedCelestialObject_ = &star;
 				twoStarAlignmentSecondStarConfirm_.text_ = {std::string("Move to ") + star.name_ + " and", "press OK"};
 				currentScreen_ = &twoStarAlignmentSecondStarConfirm_;
 			}}...
@@ -51,6 +52,46 @@ public:
 
 	ItemsList::Items unpackStarsForTwoStarAlignmentSecondStar() {
 		return unpackStarsForTwoStarAlignmentSecondStar_(coords::STARS, std::make_index_sequence<coords::STARS.size()>{});
+	}
+
+	template<typename Stars, std::size_t... I>
+	ItemsList::Items unpackStarsForGoTo_(const Stars& stars, std::index_sequence<I...>) {
+		return ItemsList::Items{
+			{stars[I].name_, [this, &star=stars[I]]() {
+				selectedCelestialObject_ = &star;
+				gotoObjectConfirm_.text_ = {
+					std::string(star.name_),
+					std::string("RA ").append(star.ra_.str()),
+					std::string("Dec ").append(star.dec_.str())
+				};
+				gotoObjectConfirm_.exitHandler_ = [this]() { currentScreen_ = &gotoStars_; };
+				currentScreen_ = &gotoObjectConfirm_;
+			}}...
+		};
+	}
+
+	ItemsList::Items unpackStarsForGoTo() {
+		return unpackStarsForGoTo_(coords::STARS, std::make_index_sequence<coords::STARS.size()>{});
+	}
+
+	template<typename Messiers, std::size_t... I>
+	ItemsList::Items unpackMessierForGoTo_(const Messiers& messiers, std::index_sequence<I...>) {
+		return ItemsList::Items{
+			{messiers[I].name_, [this, &messier=messiers[I]]() {
+				selectedCelestialObject_ = &messier;
+				gotoObjectConfirm_.text_ = {
+					std::string(messier.name_),
+					std::string("RA ").append(messier.ra_.str()),
+					std::string("Dec ").append(messier.dec_.str())
+				};
+				gotoObjectConfirm_.exitHandler_ = [this]() { currentScreen_ = &gotoMessier_; };
+				currentScreen_ = &gotoObjectConfirm_;
+			}}...
+		};
+	}
+
+	ItemsList::Items unpackMessierForGoTo() {
+		return unpackMessierForGoTo_(coords::MESSIER, std::make_index_sequence<coords::MESSIER.size()>{});
 	}
 
 	U8G2& u8g2_;
@@ -91,7 +132,7 @@ public:
 			// - pole
 			// - 2 star
 			{"Easy track", [this]() { currentScreen_ = &easyTrackAlignment_; }}
-		}
+		}, [this]() { currentScreen_ = &mountType_; }
 	};
 
 	ItemsList easyTrackAlignment_{u8g2_, "Easy track alignment", {}, {
@@ -120,13 +161,14 @@ public:
 			}},
 			{"Test", [this]() {
 				mount_.trackingMode_ = scope::Mount::TrackingMode::MOVE_TO;
-				mount_.safeMoveToPositionDeg({-180, 90}, 400);
+				auto currentPosition = mount_.currentPositionDeg();
+				mount_.safeMoveToPositionDeg({-180, currentPosition.second}, 600);
 			}},
 			{"Home", [this]() {
 				mount_.trackingMode_ = scope::Mount::TrackingMode::MOVE_TO;
-				mount_.safeMoveTo({Mount::X_AXIS_HOME, Mount::Y_AXIS_HOME}, 600);
-			}},
-			{"Cancel", [this]() { currentScreen_ = &easyTrackAlignment_; }}
+				auto currentPosition = mount_.currentPositionDeg();
+				mount_.safeMoveToPositionDeg({0, currentPosition.second}, 600);
+			}}
 		}, [this]() { currentScreen_ = &easyTrackAlignment_; }
 	};
 
@@ -138,13 +180,14 @@ public:
 			}},
 			{"Test", [this]() {
 				mount_.trackingMode_ = scope::Mount::TrackingMode::MOVE_TO;
-				mount_.safeMoveToPositionDeg({-180, 90}, 400);
+				auto currentPosition = mount_.currentPositionDeg();
+				mount_.safeMoveToPositionDeg({-180, currentPosition.second}, 600);
 			}},
 			{"Home", [this]() {
 				mount_.trackingMode_ = scope::Mount::TrackingMode::MOVE_TO;
-				mount_.safeMoveTo({Mount::X_AXIS_HOME, Mount::Y_AXIS_HOME}, 600);
-			}},
-			{"Cancel", [this]() { currentScreen_ = &easyTrackAlignment_; }}
+				auto currentPosition = mount_.currentPositionDeg();
+				mount_.safeMoveToPositionDeg({0, currentPosition.second}, 600);
+			}}
 		}, [this]() { currentScreen_ = &easyTrackAlignment_; }
 	};
 
@@ -154,12 +197,11 @@ public:
 				currentScreen_ = &alignmentFinished_;
 				mount_.setAutoTrackPivot();
 				mount_.operationMode_ = Mount::EASY_TRACK;
-			}},
-			{"Cancel", [this]() { currentScreen_ = &easyTrackAlignment_; }}
+			}}
 		}, [this]() { currentScreen_ = &easyTrackAlignment_; }
 	};
 
-	const coords::Star* selectedStar_ = &coords::STARS[static_cast<unsigned int>(coords::StarKey::Altair)];
+	const coords::CelestialObjectBase* selectedCelestialObject_ = &coords::STARS[static_cast<unsigned int>(coords::Star::Altair)];
 
 	ItemsList twoStarAlignmentFirstStar_{u8g2_, "2S alignment 1/2", {"Choose first star:"}, {
 			unpackStarsForTwoStarAlignmentFirstStar()
@@ -168,10 +210,9 @@ public:
 
 	ItemsList twoStarAlignmentFirstStarConfirm_{u8g2_, "2S alignment 1/2", {}, {
 			{"OK", [this]() {
-					mount_.setTwoStarAlignmentFirstStar({selectedStar_->ra_.rad(), selectedStar_->dec_.rad()});
+					mount_.setTwoStarAlignmentFirstStar({selectedCelestialObject_->ra_.rad(), selectedCelestialObject_->dec_.rad()});
 					currentScreen_ = &twoStarAlignmentSecondStar_;
 			}},
-			{"Cancel", [this]() { currentScreen_ = &twoStarAlignmentFirstStar_; }}
 		}, [this]() { currentScreen_ = &twoStarAlignmentFirstStar_; }
 	};
 
@@ -182,24 +223,53 @@ public:
 
 	ItemsList twoStarAlignmentSecondStarConfirm_{u8g2_, "2S alignment 2/2", {}, {
 			{"OK", [this]() {
-					mount_.setTwoStarAlignmentSecondStar({selectedStar_->ra_.rad(), selectedStar_->dec_.rad()});
+					mount_.setTwoStarAlignmentSecondStar({selectedCelestialObject_->ra_.rad(), selectedCelestialObject_->dec_.rad()});
 					mount_.operationMode_ = Mount::EASY_TRACK_GOTO;
 					currentScreen_ = &alignmentFinished_;
-			}},
-			{"Cancel", [this]() { currentScreen_ = &twoStarAlignmentSecondStar_; }}
+			}}
 		}, [this]() { currentScreen_ = &twoStarAlignmentSecondStar_; }
 	};
 
 	ItemsList alignmentFinished_{u8g2_, "", {"Alignment finished!"}, {
-			{"OK", [this]() {
-				currentScreen_ = &dashboard_;
-			}}
+			{"OK", [this]() { currentScreen_ = &dashboard_; }}
 		}
 	};
 
-	Dashboard dashboard_{u8g2_, mount_};
+	Dashboard dashboard_{u8g2_, mount_,
+			[this]() { currentScreen_ = &gotoObjects_; }
+	};
+
+	ItemsList gotoObjects_{u8g2_, "GOTO Objects", {}, {
+			{"Stars", [this]() { currentScreen_ = &gotoStars_; }},
+			{"Messier", [this]() {currentScreen_ = &gotoMessier_; }},
+			{"NGC", []() {}},
+			{"Manual", []() {}},
+		}, [this]() { currentScreen_ = &dashboard_; }
+	};
+
+	ItemsList gotoStars_{u8g2_, "GOTO Stars", {}, {
+			unpackStarsForGoTo()
+		}, [this]() { currentScreen_ = &gotoObjects_; }
+	};
+
+	ItemsList gotoMessier_{u8g2_, "GOTO Messier", {}, {
+			unpackMessierForGoTo()
+		}, [this] () { currentScreen_ = &gotoObjects_; }
+	};
+
+	ItemsList gotoObjectConfirm_{u8g2_, "GOTO Object", {}, {
+			{"OK", [this]() {
+				mount_.trackingMode_ = scope::Mount::TrackingMode::MOVE_TO;
+				mount_.safeMoveToPositionRADec({selectedCelestialObject_->ra_.rad(), selectedCelestialObject_->dec_.rad()}, 400);
+				currentScreen_ = &dashboard_;
+				previousScreen_ = nullptr;
+			}},
+			{"Cancel", [this]() { /*currentScreen_ = previousScreen_;*/ }}
+		}, [this]() { /*currentScreen_ = previousScreen_;*/ }
+	};
 
 	ScreenItem* currentScreen_ = &mountType_;
+	ScreenItem* previousScreen_ = nullptr;
 };
 
 }

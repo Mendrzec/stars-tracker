@@ -159,8 +159,10 @@ ButtonProcessor ps4ButtonCircle([]() { return PS4.Circle(); });
 
 
 void setup() {
-	Serial.begin(9600);
+	Serial.begin(115200);
 	u8g2.begin();
+	// Sometimes it happens that PS4 will blink couple times and switchoff - this means flash needs to be cleared
+	// $ python -m esptool --port COM3 erase_flash
 	PS4.begin("d8:fb:5e:69:d4:6a");
 	stepper1.setPinsInverted(true, false, false);
 	stepper2.setPinsInverted(true, false, false);

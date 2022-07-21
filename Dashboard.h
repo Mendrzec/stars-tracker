@@ -24,8 +24,8 @@ class Dashboard : public ScreenItem {
 		last = SETTINGS,
 	};
 public:
-	Dashboard(U8G2& u8g2, Mount& mount/*, Handler gotoHandler, Handler settingsHandler*/)
-		: u8g2_(u8g2), mount_(mount)/*, gotoHandler_(std::move(gotoHandler)), settingsHandler_(std::move(settingsHandler))*/ {}
+	Dashboard(U8G2& u8g2, Mount& mount, Handler gotoHandler/*, Handler settingsHandler*/)
+		: u8g2_(u8g2), mount_(mount), gotoHandler_(std::move(gotoHandler))/*, settingsHandler_(std::move(settingsHandler))*/ {}
 
 	void draw() override {
 		u8g2_.setFont(u8g2_font_profont11_tf);
@@ -85,8 +85,15 @@ public:
 		}
 	}
 	void enter() override {
-		if (focusedItem_ == Item::CTRL) {
-			mount_.toggleAutoTrack();
+		switch(focusedItem_) {
+			case Item::CTRL:
+				mount_.toggleAutoTrack();
+				break;
+			case Item::GOTO:
+				gotoHandler_();
+				break;
+			default:
+				break;
 		}
 	}
 	void exit() override {}
